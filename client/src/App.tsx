@@ -1,26 +1,26 @@
-import './App.css';
+import { TaskPanel } from '@/components/TaskPanel';
+import { ExecutionPanel } from '@/components/ExecutionPanel';
+import { useState } from 'react';
+import type { Task } from '../../server/src/schema';
 
 function App() {
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
   return (
-    <div>
-      <div className="gradient"></div>
-      <div className="grid"></div>
-      <div className="container">
-        <h1 className="title">Under Construction</h1>
-        <p className="description">
-          Your app is under construction. It's being built right now!
-        </p>
-        <div className="dots">
-          <div className="dot"></div>
-          <div className="dot"></div>
-          <div className="dot"></div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="flex h-screen">
+        {/* Left Panel - Task List */}
+        <div className="w-1/2 border-r border-gray-200 bg-white">
+          <TaskPanel 
+            selectedTask={selectedTask} 
+            onTaskSelect={setSelectedTask} 
+          />
         </div>
-        <footer className="footer">
-          Built with ❤️ by{" "}
-          <a href="https://app.build" target="_blank" className="footer-link">
-            app.build
-          </a>
-        </footer>
+
+        {/* Right Panel - Execution Results */}
+        <div className="w-1/2 bg-white">
+          <ExecutionPanel selectedTask={selectedTask} />
+        </div>
       </div>
     </div>
   );
